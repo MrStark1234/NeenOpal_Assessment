@@ -15,8 +15,8 @@ const initialNodes: Node[] = Array.from({ length: 10 }, (_, i) => ({
 }));
 
 const initialEdges: Edge[] = initialNodes.slice(1).map((node, i) => ({
-  id: `e${i + 1}-${i + 2}`,
-  source: `${i + 1}`,
+  id: (i * 2).toString(),
+  source: (i + 1).toString(),
   target: node.id,
 }));
 
@@ -51,14 +51,7 @@ const graphSlice = createSlice({
         if (action.payload.fontSize) state.nodes[nodeIndex].data.fontSize = action.payload.fontSize;
       }
     },
-    updateNodePosition: (state, action: PayloadAction<{ id: string; position: { x: number; y: number } }>) => {
-      const nodeIndex = state.nodes.findIndex((n) => n.id === action.payload.id);
-      if (nodeIndex !== -1) {
-        state.history.push(JSON.parse(JSON.stringify({ nodes: state.nodes, edges: state.edges })));
-        state.future = [];
-        state.nodes[nodeIndex].position = action.payload.position;
-      }
-    },
+
     undo: (state) => {
       if (state.history.length > 0) {
         const lastState = state.history.pop();
@@ -82,5 +75,5 @@ const graphSlice = createSlice({
   },
 });
 
-export const { updateNodes, updateEdges, updateNodeStyle, updateNodePosition, undo, redo } = graphSlice.actions;
+export const { updateNodes, updateEdges, updateNodeStyle, undo, redo } = graphSlice.actions;
 export default graphSlice.reducer;

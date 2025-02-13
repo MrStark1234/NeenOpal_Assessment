@@ -3,7 +3,7 @@ import graphReducer from "./graphSlice";
 
 export const store = configureStore({
   reducer: {
-    graph: graphReducer,
+    graphy: graphReducer,
   
   },
 });

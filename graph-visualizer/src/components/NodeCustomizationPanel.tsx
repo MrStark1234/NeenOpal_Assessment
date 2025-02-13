@@ -6,7 +6,7 @@ import { SketchPicker } from "react-color";
 const NodeCustomizationPanel = () => {
   const dispatch = useDispatch();
   const selectedNode = useSelector((state: RootState) =>
-    state.graph.nodes.find((node) => node.selected)
+    state.graphy.nodes.find((node) => node.selected)
   );
 
   const handleColorChange = (color: string) => {
@@ -20,6 +20,7 @@ const NodeCustomizationPanel = () => {
       dispatch(updateNodeStyle({ id: selectedNode.id, fontSize: Number(event.target.value) }));
     }
   };
+  
 
   if (!selectedNode) return <p>Select a node to customize</p>;
 
